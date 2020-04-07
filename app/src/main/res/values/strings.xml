@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Adorable pet</string>
+    <string name="next">Next</string>
+    <string name="booking_details">BOOKING DETAILS</string>
+    <string name="shelter">shelter</string>
+    <string name="pet_shelter">Pet Shelter</string>
+    <string name="pet_shelter_is_a_building_or_area_that_is_devoted_to_temporary_care_and_protection_of_animals_we_provide_this_facility_to_make_it_easier_for_pet_owners_to_move_around_without_worrying_about_pets">Pet shelter is a building or area that is devoted to temporary care and protection of animals. We provide this facility to make it easier for pet owners to move around without worrying about pets.</string>
+    <string name="shelter_header">Shelter</string>
+    <string name="todo">TODO</string>
+    <string name="hamburget">hamburget</string>
+    <string name="shelters">Shelter</string>
+    <string name="success">SUCCESS</string>
+    <string name="back">BACK</string>
+    <string name="thank_you">Thank you!</string>
+    <string name="logo">Logo</string>
+    <string name="rp">Rp.</string>
+    <string name="kembali">kembali</string>
+    <string name="total_payment">Total Payment</string>
+    <string name="select_payment_method">Select Payment Method</string>
+    <string name="quantity">Quantity</string>
+    <string name="paket">Package</string>
+    <string name="pay">PAY</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="browse">Browse</string>
+    <string name="submit">Submit</string>
+    <string name="upload_your_confirmation_here">Upload your confirmation here!</string>
+    <string name="upload">upload</string>
+    <string name="register">Register</string>
+    <string name="sign_in">sign in</string>
+    <string name="with_clicking_sign_in_you_will_agree_to_our_policies_terms_and_conditions">With clicking sign in you will agree to our policies terms and conditions</string>
+    <string name="pay_method">Pay Method</string>
+</resources>

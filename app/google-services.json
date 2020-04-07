@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "797395561598",
+    "firebase_url": "https://adorablepet-b318b.firebaseio.com",
+    "project_id": "adorablepet-b318b",
+    "storage_bucket": "adorablepet-b318b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797395561598:android:c7526f9e5651e62161bc2f",
+        "android_client_info": {
+          "package_name": "com.example.adorablepet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797395561598-janmjkcrrjbci40nomng5aeifgesideb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.adorablepet",
+            "certificate_hash": "1cd1cd534a3902988e968b7f5f0ac35878da3e32"
+          }
+        },
+        {
+          "client_id": "797395561598-5oi9if1tdft3kqmf932ib9isqmvl6qs0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7_-NBm8SpbYjth4xh0vUA8PQ5b68CnAM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797395561598-5oi9if1tdft3kqmf932ib9isqmvl6qs0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
