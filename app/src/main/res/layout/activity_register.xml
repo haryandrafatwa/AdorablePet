@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="?colorPrimary">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -11,14 +11,14 @@
             android:id="@+id/iv_logo"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:background="@drawable/dog"
+            android:background="@drawable/ic_logo"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_btn_solid_primary"
+            android:background="@drawable/bg_btn_solid_white"
             android:layout_margin="16dp"
             android:padding="16dp"
             android:layout_below="@id/iv_logo">
@@ -30,7 +30,7 @@
                 android:text="Register"
                 android:textSize="20sp"
                 android:fontFamily="@font/sf_pro_display_medium"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:layout_centerHorizontal="true"/>
 
             <LinearLayout
@@ -52,8 +52,7 @@
                     android:textColor="@color/colorInputText"
                     android:textSize="14sp"
                     android:background="@drawable/bg_edittext"
-                    android:layout_marginRight="8dp"
-                    android:backgroundTint="@android:color/white"/>
+                    android:layout_marginRight="8dp"/>
 
                 <EditText
                     android:id="@+id/et_last_name_daftar"
@@ -65,8 +64,7 @@
                     android:inputType="text"
                     android:textColor="@color/colorInputText"
                     android:textSize="14sp"
-                    android:background="@drawable/bg_edittext"
-                    android:backgroundTint="@android:color/white"/>
+                    android:background="@drawable/bg_edittext"/>
 
             </LinearLayout>
 
@@ -81,7 +79,6 @@
                 android:textColor="@color/colorInputText"
                 android:textSize="14sp"
                 android:background="@drawable/bg_edittext"
-                android:backgroundTint="@android:color/white"
                 android:layout_below="@id/nama_lengkap"/>
 
             <EditText
@@ -95,7 +92,6 @@
                 android:textColor="@color/colorInputText"
                 android:textSize="14sp"
                 android:background="@drawable/bg_edittext"
-                android:backgroundTint="@android:color/white"
                 android:layout_below="@id/et_username_daftar"/>
 
             <EditText
@@ -109,7 +105,6 @@
                 android:textColor="@color/colorInputText"
                 android:textSize="14sp"
                 android:background="@drawable/bg_edittext"
-                android:backgroundTint="@android:color/white"
                 android:layout_below="@id/et_email_daftar"/>
 
             <EditText
@@ -123,7 +118,6 @@
                 android:textColor="@color/colorInputText"
                 android:textSize="14sp"
                 android:background="@drawable/bg_edittext"
-                android:backgroundTint="@android:color/white"
                 android:layout_below="@id/et_phonenumber_daftar"/>
 
             <TextView
@@ -132,7 +126,6 @@
                 android:layout_height="wrap_content"
                 android:text="With clicking Sign Up you will agree to our policies, terms, and conditions"
                 android:layout_below="@id/et_password_daftar"
-                android:textColor="@android:color/white"
                 android:fontFamily="@font/sf_pro_display_light"
                 android:layout_marginTop="32dp"/>
             <Button
@@ -142,8 +135,8 @@
                 android:layout_below="@id/agree"
                 android:text="Sign up"
                 android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
-                android:background="@drawable/bg_btn_solid_white"
+                android:textColor="@android:color/white"
+                android:background="@drawable/bg_btn_solid_primary"
                 android:padding="10dp"/>
 
             <RelativeLayout
@@ -157,8 +150,7 @@
                     android:id="@+id/tv2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="already have an account?"
-                    android:textColor="@android:color/white"/>
+                    android:text="already have an account?"/>
 
                 <TextView
                     android:id="@+id/tv_login"
