@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private TextView tv_daftar;
+    private TextView tv_daftar,tv_reset;
     private FirebaseAuth mAuth;
     private ProgressDialog mDialog;
     private Button btnMasuk;
@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     private void initialize(){
 
         tv_daftar = findViewById(R.id.tv_daftar);
+        tv_reset = findViewById(R.id.tv_lupa_password);
         mAuth = FirebaseAuth.getInstance();
         mDialog = new ProgressDialog(this);
         btnMasuk = findViewById(R.id.btn_masuk);
@@ -51,6 +52,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setActivity(RegisterActivity.class);
+            }
+        });
+
+        tv_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setActivity(ResetPasswordActivity.class);
             }
         });
 

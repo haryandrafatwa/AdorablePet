@@ -12,7 +12,7 @@
             android:id="@+id/ic_logo"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:background="@drawable/ic_logo"
+            android:background="@drawable/ic_adobe"
             android:layout_centerHorizontal="true"/>
 
         <TextView
