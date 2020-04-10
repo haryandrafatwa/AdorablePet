@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuLost"
+        android:enabled="true"
+        android:icon="@drawable/ic_lost"
+        android:iconTint="@color/colorAccent"
+        android:title="Lost and Found">
+    </item>
+    <item
+        android:id="@+id/menuCare"
+        android:enabled="true"
+        android:icon="@drawable/ic_care"
+        android:iconTint="@color/colorAccent"
+        android:title="Animal Care">
+    </item>
+    <item android:id="@+id/menuAdopt"
+        android:title="Adopt a Pet"
+        android:icon="@drawable/ic_adobe"
+        android:iconTint="@color/colorAccent">
+    </item>
+    <item android:id="@+id/menuDonate"
+        android:title="Donate"
+        android:icon="@drawable/ic_donate"
+        android:iconTint="@color/colorAccent">
+    </item>
+    <item android:id="@+id/menuShelter"
+        android:title="Shelter"
+        android:icon="@drawable/ic_shelter"
+        android:iconTint="@color/colorAccent">
+    </item>
+
+</menu>

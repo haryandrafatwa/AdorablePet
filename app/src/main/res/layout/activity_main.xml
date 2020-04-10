@@ -1,100 +1,412 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="43dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="85dp"
-        android:layout_marginRight="85dp"
-        android:text="@string/pet_shelter"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="415dp"
-        android:layout_height="65dp"
-        android:background="#FFA407"
-        android:gravity="center"
-        android:text="@string/shelter_header"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavBar"
+        android:layout_width="match_parent"
+        android:background="@android:color/white"
+        app:menu="@menu/menu_bottom_navigation"
+        app:labelVisibilityMode="unlabeled"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="371dp"
-        android:layout_marginRight="371dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:srcCompat="@drawable/ic_action_back"
-        android:contentDescription="@string/todo" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"/>
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="362dp"
-        android:layout_height="135dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        android:gravity="center"
-        android:text="@string/pet_shelter_is_a_building_or_area_that_is_devoted_to_temporary_care_and_protection_of_animals_we_provide_this_facility_to_make_it_easier_for_pet_owners_to_move_around_without_worrying_about_pets"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/main_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavBar">
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="77dp"
-        android:layout_height="67dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginRight="46dp"
-        android:contentDescription="@str"
-        app:layout_constraintEnd_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:srcCompat="@drawable/dog" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_main"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="@color/colorPrimary">
 
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="27dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/hamburget"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.008"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/textView4"
-        app:srcCompat="@drawable/ic_action_name" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="16dp">
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="386dp"
-        android:layout_height="244dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginRight="9dp"
-        android:background="@drawable/border"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+                    <ImageButton
+                        android:id="@+id/ib_button_setting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_settings"
+                        android:layout_centerVertical="true"
+                        android:backgroundTint="@android:color/white"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Home"
+                        android:layout_centerInParent="true"
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/sf_pro_display_medium"/>
+
+                    <ImageButton
+                        android:id="@+id/ib_button_notification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_notifications"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:backgroundTint="@android:color/white"/>
+
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <RelativeLayout
+                android:id="@+id/layout_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_solid_background"
+                android:padding="16dp"
+                android:layout_margin="16dp"
+                android:layout_below="@id/toolbar_main">
+
+                <RelativeLayout
+                    android:id="@+id/row_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/btnLost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_btn_solid_white"
+                        android:padding="4dp">
+
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:background="@drawable/ic_lost"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/btnAdopt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_btn_solid_white"
+                        android:padding="4dp"
+                        android:layout_centerHorizontal="true">
+
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:background="@drawable/ic_adobe"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/btnCare"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_btn_solid_white"
+                        android:padding="4dp"
+                        android:layout_alignParentEnd="true">
+
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:background="@drawable/ic_care"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/row_2"
+                    android:layout_below="@id/row_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <RelativeLayout
+                        android:id="@+id/btnDonate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_btn_solid_white"
+                        android:padding="4dp">
+
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:background="@drawable/ic_donate"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/btnShelter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_btn_solid_white"
+                        android:padding="4dp"
+                        android:layout_centerHorizontal="true">
+
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:background="@drawable/ic_shelter"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_spotlight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_menu"
+                android:background="@drawable/bg_btn_solid_primary"
+                android:layout_margin="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_white"
+                    android:layout_below="@id/iv_menu_shelterspotlight"
+                    android:layout_marginTop="-40dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="16dp">
+
+                    <TextView
+                        android:id="@+id/shelterspotlight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Shelter Spotlight"
+                        android:fontFamily="@font/sf_pro_display_semibold"
+                        android:layout_marginLeft="48dp"/>
+                    
+                    <RelativeLayout
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/shelterspotlight"
+                        android:layout_marginTop="16dp">
+                        
+                        <ImageView
+                            android:id="@+id/iv_weareloving"
+                            android:layout_width="100dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/ic_we_are_loving"/>
+
+                        <TextView
+                            android:id="@+id/title_shelterspotlight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="We Are Loving Our Animals"
+                            android:layout_below="@id/iv_weareloving"
+                            android:textSize="6sp"
+                            android:fontFamily="@font/sf_pro_display_medium"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimary"/>
+
+                        <TextView
+                            android:id="@+id/deskripsi_shelterspotlight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Our love to animals are just like loving to kids. We are care about their safety, hygiene, health, and of course ther need about love"
+                            android:layout_below="@id/title_shelterspotlight"
+                            android:textSize="6sp"
+                            android:fontFamily="@font/sf_pro_display_regular"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginTop="4dp"
+                            android:justificationMode="inter_word"
+                            android:textColor="@android:color/black" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/shelterspotlight"
+                        android:layout_marginTop="16dp"
+                        android:layout_centerHorizontal="true">
+
+                        <ImageView
+                            android:id="@+id/iv_surrenderyourpet"
+                            android:layout_width="100dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/ic_surrenderwith"/>
+
+                        <TextView
+                            android:id="@+id/title_surrenderyourpet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Surrender with your pet?"
+                            android:layout_below="@id/iv_surrenderyourpet"
+                            android:textSize="6sp"
+                            android:fontFamily="@font/sf_pro_display_medium"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimary"/>
+
+                        <TextView
+                            android:id="@+id/deskripsi_surrenderyourpet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="We are always able to adopt your pet if you can't hold on anymore with your pet. Just come to our shelter"
+                            android:layout_below="@id/title_surrenderyourpet"
+                            android:textSize="6sp"
+                            android:layout_marginHorizontal="8dp"
+                            android:fontFamily="@font/sf_pro_display_regular"
+                            android:layout_marginTop="4dp"
+                            android:justificationMode="inter_word"
+                            android:textColor="@android:color/black" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/shelterspotlight"
+                        android:layout_marginTop="16dp"
+                        android:layout_alignParentEnd="true">
+
+                        <ImageView
+                            android:id="@+id/iv_findwandering"
+                            android:layout_width="100dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/ic_findwandering"/>
+
+                        <TextView
+                            android:id="@+id/title_findwandering"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="We Are Loving Our Animals"
+                            android:layout_below="@id/iv_findwandering"
+                            android:textSize="6sp"
+                            android:fontFamily="@font/sf_pro_display_medium"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimary"/>
+
+                        <TextView
+                            android:id="@+id/deskripsi_findwandering"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Our love to animals are just like loving to kids. We are care about their safety, hygiene, health, and of course ther need about love"
+                            android:layout_below="@id/title_findwandering"
+                            android:textSize="6sp"
+                            android:fontFamily="@font/sf_pro_display_regular"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginTop="4dp"
+                            android:justificationMode="inter_word"
+                            android:textColor="@android:color/black" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/iv_menu_shelterspotlight"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_spotlight"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="4dp"/>
+
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                android:layout_below="@id/layout_spotlight"
+                android:padding="16dp"
+                android:layout_margin="16dp">
+
+                <ImageView
+                    android:id="@+id/iv_shelterlocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:src="@drawable/ic_shelter_location"
+                    android:scaleType="centerCrop"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/shelterlocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Shelter Location"
+                        android:textSize="18sp"
+                        android:textColor="@android:color/white"
+                        android:fontFamily="@font/sf_pro_display_medium"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginLeft="32dp"/>
+
+                    <TextView
+                        android:id="@+id/ourlocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Our Location In:"
+                        android:textColor="@android:color/white"
+                        android:fontFamily="@font/sf_pro_display_regular"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="32dp"
+                        android:layout_below="@id/shelterlocation"/>
+
+                    <TextView
+                        android:id="@+id/jalanumayah"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jl. H. Umayah II No.32, Citeureup,"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/sf_pro_display_regular"
+                        android:layout_marginLeft="32dp"
+                        android:layout_below="@id/ourlocation"/>
+
+                    <TextView
+                        android:id="@+id/kecamatan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kec. Dayeuhkolot, Bandung, Jawa Barat 40257"
+                        android:textColor="@android:color/white"
+                        android:fontFamily="@font/sf_pro_display_regular"
+                        android:layout_marginLeft="32dp"
+                        android:textSize="12sp"
+                        android:layout_below="@id/jalanumayah"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_map_location"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="16dp"/>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:id="@+id/frameFragment"
+        android:layout_width="match_parent"
+        android:layout_above="@id/bottomNavBar"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+</RelativeLayout>
