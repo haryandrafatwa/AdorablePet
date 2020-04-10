@@ -22,7 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class ShelterFragment extends Fragment {
+public class BookFragment extends Fragment {
 
     private BottomNavigationView bottomNavigationView;
     private DrawerLayout drawerLayout;
@@ -35,19 +35,12 @@ public class ShelterFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                setActivity(MainActivity.class);
-            }
-        };
-        getActivity().getOnBackPressedDispatcher().addCallback(this,callback);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_shelter, container, false);
+        return inflater.inflate(R.layout.fragment_book, container, false);
     }
 
     @Override
@@ -62,7 +55,7 @@ public class ShelterFragment extends Fragment {
         toolbar = getActivity().findViewById(R.id.toolbar_shelter);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavBar);
-        bottomNavigationView.setVisibility(View.VISIBLE);
+        bottomNavigationView.setVisibility(View.GONE);
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(),drawerLayout,toolbar,R.string.drawer_opened,R.string.drawer_closed);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -71,31 +64,24 @@ public class ShelterFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        button = getActivity().findViewById(R.id.btnBookNow);
+        button = getActivity().findViewById(R.id.btnNext);
         ib_back = getActivity().findViewById(R.id.ib_back);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BookFragment bookFragment = new BookFragment();
-                setFragment(bookFragment);
+                BookDetailFragment bookDetailFragment = new BookDetailFragment();
+                setFragment(bookDetailFragment);
             }
         });
 
         ib_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setActivity(MainActivity.class);
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
 
-    }
-
-    private void setActivity(Class activity) { // fungsi untuk kelarin activity terakhir, dan diganti ke activity baru trus dikirim ke halaman login
-        Intent mainIntent = new Intent(getActivity(), activity);
-        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(mainIntent);
-        getActivity().finish();
     }
 
     private void setFragment(Fragment fragment) // fungsi buat pindah - pindah fragment

@@ -8,4 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ToolbarThemePrimary" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="android:homeAsUpIndicator">@drawable/ic_menu</item>
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
+
+    <style name="CustomAlertDialog" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/bg_btn_solid_white</item>
+    </style>
+
 </resources>

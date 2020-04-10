@@ -29,4 +29,6 @@
     <string name="sign_in">sign in</string>
     <string name="with_clicking_sign_in_you_will_agree_to_our_policies_terms_and_conditions">With clicking sign in you will agree to our policies terms and conditions</string>
     <string name="pay_method">Pay Method</string>
+    <string name="drawer_opened">Drawer Opened</string>
+    <string name="drawer_closed">Drawer Closed</string>
 </resources>

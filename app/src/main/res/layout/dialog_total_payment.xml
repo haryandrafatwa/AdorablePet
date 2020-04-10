@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageButton
+            android:id="@+id/ib_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_arrow_left"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ib_back"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="16dp">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/dog"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:id="@+id/totalpayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Payment"
+                android:layout_below="@id/image"
+                android:textSize="20sp"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:id="@+id/tv_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp200.000"
+                android:layout_below="@id/totalpayment"
+                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp"/>
+
+            <ImageView
+                android:id="@+id/separator1"
+                android:layout_width="240dp"
+                android:layout_height="2dp"
+                android:background="@android:color/black"
+                android:layout_below="@id/tv_pay"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/paymentmethod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment Method: Mandiri"
+                android:layout_below="@id/separator1"
+                android:textSize="20sp"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"/>
+
+            <ImageView
+                android:id="@+id/separator2"
+                android:layout_width="240dp"
+                android:layout_height="2dp"
+                android:background="@android:color/black"
+                android:layout_below="@id/paymentmethod"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"/>
+
+            <Button
+                android:id="@+id/btnPay"
+                android:layout_width="240dp"
+                android:layout_height="40dp"
+                android:text="Pay Now"
+                android:layout_centerHorizontal="true"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_btn_solid_primary"
+                android:layout_below="@id/separator2"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*You can not change the payment method later"
+                android:layout_below="@id/btnPay"
+                android:textColor="@android:color/holo_red_dark"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:layout_marginTop="8dp"
+                android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

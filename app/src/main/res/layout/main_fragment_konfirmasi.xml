@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_shelter"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
+                android:theme="@style/ToolbarThemePrimary">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Book"
+                    android:layout_centerInParent="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/sf_pro_display_medium"/>
+
+                <ImageButton
+                    android:id="@+id/ib_button_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_notifications"
+                    android:layout_gravity="end"
+                    android:layout_marginRight="16dp"
+                    android:backgroundTint="@android:color/white"/>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/app_bar"
+            android:padding="16dp">
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_arrow_left"/>
+
+            <RelativeLayout
+                android:id="@+id/layout_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ib_back"
+                android:layout_marginTop="8dp"
+                android:padding="16dp"
+                android:background="@drawable/bg_btn_solid_white_stroke">
+
+                <TextView
+                    android:id="@+id/silahkan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Silahkan melakukan pembayaran ke:"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/sf_pro_display_regular"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/norekening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No. Rekening"
+                    android:layout_below="@id/silahkan"
+                    android:fontFamily="@font/sf_pro_display_regular"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="16dp"/>
+
+                <TextView
+                    android:id="@+id/rekening"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="900413789123"
+                    android:layout_below="@id/norekening"
+                    android:fontFamily="@font/sf_pro_display_regular"
+                    android:textColor="@android:color/black"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_edittext"/>
+
+                <TextView
+                    android:id="@+id/atasnama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Atas Nama"
+                    android:layout_below="@id/rekening"
+                    android:fontFamily="@font/sf_pro_display_regular"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="16dp"/>
+
+                <TextView
+                    android:id="@+id/as_rekening"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="PT ADORABLE PET"
+                    android:layout_below="@id/atasnama"
+                    android:fontFamily="@font/sf_pro_display_regular"
+                    android:textColor="@android:color/black"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_edittext"/>
+
+                <TextView
+                    android:id="@+id/tvbank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bank"
+                    android:layout_below="@id/as_rekening"
+                    android:fontFamily="@font/sf_pro_display_regular"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="16dp"/>
+
+                <TextView
+                    android:id="@+id/bank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MANDIRI"
+                    android:layout_below="@id/tvbank"
+                    android:fontFamily="@font/sf_pro_display_regular"
+                    android:textColor="@android:color/black"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_edittext"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_payment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_title"
+                android:layout_marginTop="16dp"
+                android:padding="16dp"
+                android:background="@drawable/bg_btn_solid_white_stroke">
+
+                <TextView
+                    android:id="@+id/tvtotalpembayaran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Pembayaran"
+                    android:fontFamily="@font/sf_pro_display_regular"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="16dp"/>
+
+                <TextView
+                    android:id="@+id/totalpembayaran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MANDIRI"
+                    android:layout_below="@id/tvtotalpembayaran"
+                    android:fontFamily="@font/sf_pro_display_regular"
+                    android:textColor="@android:color/black"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_edittext"/>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnUploadBukti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Upload Bukti Transfer"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_btn_solid_primary"
+                android:layout_below="@id/layout_payment"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/sf_pro_display_semibold"
+                android:layout_marginTop="16dp"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

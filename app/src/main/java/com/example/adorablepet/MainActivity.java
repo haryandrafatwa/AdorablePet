@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private NestedScrollView nestedScrollView;
     private ImageButton ib_setting;
 
+    private RelativeLayout shelter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SettingFragment settingFragment = new SettingFragment();
                 setFragment(settingFragment);
+            }
+        });
+
+        shelter = findViewById(R.id.btnShelter);
+        shelter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFragment(shelterFragment);
+                nestedScrollView.setVisibility(View.GONE);
             }
         });
 
