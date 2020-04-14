@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/white">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -95,7 +94,8 @@
                 android:id="@+id/main_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/image">
+                android:layout_toRightOf="@id/image"
+                android:layout_marginLeft="4dp">
 
                 <LinearLayout
                     android:id="@+id/layout_package"
@@ -106,6 +106,7 @@
                     android:padding="6dp">
 
                     <TextView
+                        android:id="@+id/package_bd"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Package"
@@ -135,6 +136,7 @@
                     android:padding="6dp">
 
                     <TextView
+                        android:id="@+id/qty_bd"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Quantity"
@@ -164,6 +166,7 @@
                     android:padding="6dp">
 
                     <TextView
+                        android:id="@+id/drs_bd"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Duration"
@@ -194,6 +197,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/ai_bd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Additional Information:"
@@ -217,6 +221,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tp_bd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total Payment"

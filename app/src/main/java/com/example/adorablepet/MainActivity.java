@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton ib_setting,ib_notif;
     private NotificationBadge mBadge;
 
-    private RelativeLayout shelter;
+    private RelativeLayout shelter,layout_menu;
     private int numOfNotif;
 
     private DatabaseReference userRefs,shelterRefs;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavBar);
         bottomNavigationView.setItemIconTintList(null);
         nestedScrollView = findViewById(R.id.main_view);
+        layout_menu = findViewById(R.id.layout_menu);
         nestedScrollView.setVisibility(View.VISIBLE);
 
         final LostFragment lostFragment = new LostFragment();
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SettingFragment settingFragment = new SettingFragment();
                 setFragment(settingFragment);
+                nestedScrollView.setVisibility(View.GONE);
             }
         });
 
@@ -141,12 +144,38 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        userRefs = FirebaseDatabase.getInstance().getReference().child("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        userRefs.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("notif").getValue().toString().equalsIgnoreCase("on")){
+                    mBadge.setVisibility(View.VISIBLE);
+                }else{
+                    mBadge.setVisibility(View.GONE);
+                }
+
+                View view = getWindow().getDecorView();
+                if(dataSnapshot.child("theme").getValue().toString().equalsIgnoreCase("on")){
+                    view.setBackgroundColor(getResources().getColor(R.color.colorDark));
+                    layout_menu.setBackground(getDrawable(R.drawable.bg_btn_solid_black_stroke));
+                }else{
+                    view.setBackgroundColor(getResources().getColor(R.color.colorLight));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
     public void setFragment(Fragment fragment)
     {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frameFragment,fragment);
         fragmentTransaction.commit();
+
     }
 
     public static Context getContextOfApplication() {

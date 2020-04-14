@@ -1,5 +1,6 @@
 package com.example.adorablepet;
 
+import android.graphics.Color;
 import android.icu.text.DecimalFormat;
 import android.icu.text.NumberFormat;
 import android.icu.text.SimpleDateFormat;
@@ -45,12 +46,12 @@ public class BookDetailFragment extends Fragment {
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
     private ImageButton ib_back, ib_setting,ib_notif;
-    private TextView tv_package, tv_quantity, tv_duration, tv_totprice;
+    private TextView tv_package, tv_quantity, tv_duration, tv_totprice,pck,qty,drs,ai,tp;
     private EditText et_additional;
 
     private Button button;
     private Bundle bundle;
-
+    private View view;
 
     private NotificationBadge mBadge;
     private int numOfNotif;
@@ -82,6 +83,14 @@ public class BookDetailFragment extends Fragment {
 
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavBar);
         bottomNavigationView.setVisibility(View.GONE);
+
+        view = getView().getRootView();
+
+        pck = getActivity().findViewById(R.id.package_bd);
+        qty = getActivity().findViewById(R.id.qty_bd);
+        drs = getActivity().findViewById(R.id.drs_bd);
+        ai = getActivity().findViewById(R.id.ai_bd);
+        tp = getActivity().findViewById(R.id.tp_bd);
 
         button = getActivity().findViewById(R.id.btnSelectMethod);
         ib_back = getActivity().findViewById(R.id.ib_back);
@@ -307,6 +316,26 @@ public class BookDetailFragment extends Fragment {
                     mBadge.setVisibility(View.VISIBLE);
                 }else{
                     mBadge.setVisibility(View.GONE);
+                }
+
+                if(dataSnapshot.child("theme").getValue().toString().equalsIgnoreCase("on")){
+                    if (getActivity() != null){
+                        view.setBackgroundColor(getResources().getColor(R.color.colorDark));
+                        pck.setTextColor(Color.WHITE);
+                        qty.setTextColor(Color.WHITE);
+                        drs.setTextColor(Color.WHITE);
+                        ai.setTextColor(Color.WHITE);
+                        tp.setTextColor(Color.WHITE);
+                        et_additional.setTextColor(Color.WHITE);
+                        tv_duration.setTextColor(Color.WHITE);
+                        tv_package.setTextColor(Color.WHITE);
+                        tv_quantity.setTextColor(Color.WHITE);
+                        tv_totprice.setTextColor(Color.WHITE);
+                    }
+                }else{
+                    if (getActivity()!=null){
+                        view.setBackgroundColor(getResources().getColor(R.color.colorLight));
+                    }
                 }
             }
 

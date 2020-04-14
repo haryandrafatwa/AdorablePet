@@ -1,5 +1,6 @@
 package com.example.adorablepet;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -28,6 +29,7 @@ public class SettingFragment extends Fragment {
     private BottomNavigationView bottomNavigationView;
     private ImageButton ib_back;
     private SwitchCompat sw_notif, sw_night;
+    private View view;
 
     private DatabaseReference userRefs;
 
@@ -61,6 +63,7 @@ public class SettingFragment extends Fragment {
 
     private void initialize(){
 
+        view = getView().getRootView();
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavBar);
         bottomNavigationView.setVisibility(View.GONE);
 
@@ -93,6 +96,18 @@ public class SettingFragment extends Fragment {
                 }else{
                     sw_notif.setChecked(false);
                 }
+
+                if (dataSnapshot.child("theme").getValue().toString().equalsIgnoreCase("on")){
+                    sw_night.setChecked(true);
+                    if (getActivity()!= null){
+                        view.setBackgroundColor(getActivity().getColor(R.color.colorDark));
+                    }
+                }else{
+                    sw_night.setChecked(false);
+                    if (getActivity()!= null){
+                        view.setBackgroundColor(getActivity().getColor(R.color.colorLight));
+                    }
+                }
             }
 
             @Override
@@ -108,6 +123,23 @@ public class SettingFragment extends Fragment {
                     userRefs.child("notif").setValue("on");
                 }else{
                     userRefs.child("notif").setValue("off");
+                }
+            }
+        });
+
+        sw_night.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    userRefs.child("theme").setValue("on");
+                    if (getActivity()!= null){
+                        view.setBackgroundColor(getActivity().getColor(R.color.colorDark));
+                    }
+                }else{
+                    userRefs.child("theme").setValue("off");
+                    if (getActivity()!= null){
+                        view.setBackgroundColor(getActivity().getColor(R.color.colorLight));
+                    }
                 }
             }
         });

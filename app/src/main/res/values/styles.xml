@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="background">@color/colorLight</item>
+<!--        <item name="android:background">@color/colorLight</item>-->
     </style>
 
     <style name="NightTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
@@ -14,7 +14,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="background">@color/colorDark</item>
+        <item name="android:background">@color/colorDark</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="ToolbarThemePrimary" parent="@style/ThemeOverlay.AppCompat.ActionBar">

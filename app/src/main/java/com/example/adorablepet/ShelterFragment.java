@@ -1,7 +1,9 @@
 package com.example.adorablepet;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +41,8 @@ public class ShelterFragment extends Fragment {
     private NotificationBadge mBadge;
     private int numOfNotif;
 
+    private View view;
+
     private DatabaseReference shelterRefs,userRefs;
 
     @Override
@@ -67,6 +71,8 @@ public class ShelterFragment extends Fragment {
 
     private void initialize(){
 
+        view = getView().getRootView();
+
         toolbar = getActivity().findViewById(R.id.toolbar_shelter);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity)getActivity()).setTitle("");
@@ -79,6 +85,7 @@ public class ShelterFragment extends Fragment {
         ib_setting = getActivity().findViewById(R.id.ib_button_setting_shelter);
         ib_notif = getActivity().findViewById(R.id.ib_button_notification_shelter);
         mBadge = getActivity().findViewById(R.id.notif_badge);
+        view = getActivity().getWindow().getDecorView();
 
         ib_notif.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +169,16 @@ public class ShelterFragment extends Fragment {
                     mBadge.setVisibility(View.VISIBLE);
                 }else{
                     mBadge.setVisibility(View.GONE);
+                }
+
+                if(dataSnapshot.child("theme").getValue().toString().equalsIgnoreCase("on")){
+                    if (getActivity() != null) {
+                        view.setBackgroundColor(getResources().getColor(R.color.colorDark));
+                    }
+                }else{
+                    if (getActivity() != null) {
+                        view.setBackgroundColor(getResources().getColor(R.color.colorLight));
+                    }
                 }
             }
 

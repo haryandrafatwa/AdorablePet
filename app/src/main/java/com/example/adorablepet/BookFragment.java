@@ -1,6 +1,8 @@
 package com.example.adorablepet;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
@@ -42,12 +45,18 @@ public class BookFragment extends Fragment {
     private ImageButton ib_back, ib_setting,ib_notif;
     private Spinner packages,quantity,duration;
     private EditText et_package,et_quantity,et_duration;
+    private TextView pck,qty,drs;
     private int packPrice, durPrice, quanPrice,totPrice;
 
     private Button button;
 
     private NotificationBadge mBadge;
     private int numOfNotif;
+    private View view;
+
+    private ArrayAdapter<String> spinnerPackage;
+    private ArrayAdapter<String> spinnerDuration;
+    private ArrayAdapter<String> spinnerQuantity;
 
     private DatabaseReference shelterRefs,userRefs;
 
@@ -70,6 +79,8 @@ public class BookFragment extends Fragment {
 
     private void initialize(){
 
+        view = getView().getRootView();
+
         toolbar = getActivity().findViewById(R.id.toolbar_shelter);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity)getActivity()).setTitle("");
@@ -88,6 +99,9 @@ public class BookFragment extends Fragment {
         ib_setting = getActivity().findViewById(R.id.ib_button_setting_shelter);
         ib_notif = getActivity().findViewById(R.id.ib_button_notification_shelter);
         mBadge = getActivity().findViewById(R.id.notif_badge);
+        pck = getActivity().findViewById(R.id.tv_package);
+        qty = getActivity().findViewById(R.id.tv_quantity);
+        drs = getActivity().findViewById(R.id.tv_duration);
 
         ib_notif.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +119,23 @@ public class BookFragment extends Fragment {
                     mBadge.setVisibility(View.VISIBLE);
                 }else{
                     mBadge.setVisibility(View.GONE);
+                }
+
+
+                if(dataSnapshot.child("theme").getValue().toString().equalsIgnoreCase("on")){
+                    if (getActivity()!=null){
+                        view.setBackgroundColor(getResources().getColor(R.color.colorDark));
+                        pck.setTextColor(Color.WHITE);
+                        qty.setTextColor(Color.WHITE);
+                        drs.setTextColor(Color.WHITE);
+                        quantity.getBackground().setColorFilter(getResources().getColor(R.color.colorLight), PorterDuff.Mode.SRC_ATOP);
+                        packages.getBackground().setColorFilter(getResources().getColor(R.color.colorLight), PorterDuff.Mode.SRC_ATOP);
+                        duration.getBackground().setColorFilter(getResources().getColor(R.color.colorLight), PorterDuff.Mode.SRC_ATOP);
+                    }
+                }else{
+                    if (getActivity()!=null){
+                        view.setBackgroundColor(getResources().getColor(R.color.colorLight));
+                    }
                 }
             }
 
@@ -194,7 +225,7 @@ public class BookFragment extends Fragment {
                 "Duration", "3 Jam", "5 Jam", "12 Jam", "1 Hari","3 Hari","5 Hari","1 Minggu"
         };
 
-        ArrayAdapter<String> spinnerPackage = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner, entriesPackages);
+        spinnerPackage = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner, entriesPackages);
         spinnerPackage.setDropDownViewResource(R.layout.item_spinner);
         packages.setAdapter(spinnerPackage);
         packages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -221,7 +252,7 @@ public class BookFragment extends Fragment {
             }
         });
 
-        ArrayAdapter<String> spinnerDuration = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner, durationPackages);
+        spinnerDuration = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner, durationPackages);
         spinnerDuration.setDropDownViewResource(R.layout.item_spinner);
         duration.setAdapter(spinnerDuration);
         duration.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -254,7 +285,7 @@ public class BookFragment extends Fragment {
             }
         });
 
-        ArrayAdapter<String> spinnerQuantity = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner, quantityPackages);
+        spinnerQuantity = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner, quantityPackages);
         spinnerQuantity.setDropDownViewResource(R.layout.item_spinner);
         quantity.setAdapter(spinnerQuantity);
         quantity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

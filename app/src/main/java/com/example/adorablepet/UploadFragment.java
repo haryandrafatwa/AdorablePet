@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Bundle;
@@ -81,6 +82,8 @@ public class UploadFragment extends Fragment {
 
     private NotificationBadge mBadge;
     private int numOfNotif;
+    private RelativeLayout relativeLayout;
+    private TextView textView;
 
     private DatabaseReference shelterRefs,userRefs;
 
@@ -103,6 +106,7 @@ public class UploadFragment extends Fragment {
 
     private void initialize(){
 
+        final View view = getView().getRootView();
         toolbar = getActivity().findViewById(R.id.toolbar_shelter);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavBar);
@@ -120,6 +124,8 @@ public class UploadFragment extends Fragment {
         ib_setting = getActivity().findViewById(R.id.ib_button_setting_shelter);
         ib_notif = getActivity().findViewById(R.id.ib_button_notification_shelter);
         mBadge = getActivity().findViewById(R.id.notif_badge);
+        relativeLayout = getActivity().findViewById(R.id.layout_title);
+        textView = getActivity().findViewById(R.id.uploadyour);
 
         ib_notif.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +168,16 @@ public class UploadFragment extends Fragment {
                     mBadge.setVisibility(View.VISIBLE);
                 }else{
                     mBadge.setVisibility(View.GONE);
+                }
+
+                if (getActivity() != null) {
+                    if(dataSnapshot.child("theme").getValue().toString().equalsIgnoreCase("on")){
+                        view.setBackgroundColor(getResources().getColor(R.color.colorDark));
+                        relativeLayout.setBackground(getActivity().getDrawable(R.drawable.bg_btn_solid_black_stroke));
+                        textView.setTextColor(Color.WHITE);
+                    }else{
+                        view.setBackgroundColor(getResources().getColor(R.color.colorLight));
+                    }
                 }
             }
 

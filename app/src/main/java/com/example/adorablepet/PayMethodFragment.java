@@ -51,6 +51,8 @@ public class PayMethodFragment extends Fragment {
     private Bundle bundle;
     private HashMap hashMap;
     private String price;
+    private TextView textView;
+    private RelativeLayout relativeLayout,relativeLayout2;
 
     private NotificationBadge mBadge;
     private int numOfNotif;
@@ -76,6 +78,8 @@ public class PayMethodFragment extends Fragment {
 
     private void initialize(){
 
+        final View view = getView().getRootView();
+
         toolbar = getActivity().findViewById(R.id.toolbar_shelter);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity)getActivity()).setTitle("");
@@ -87,6 +91,9 @@ public class PayMethodFragment extends Fragment {
         ib_setting = getActivity().findViewById(R.id.ib_button_setting_shelter);
         ib_notif = getActivity().findViewById(R.id.ib_button_notification_shelter);
         mBadge = getActivity().findViewById(R.id.notif_badge);
+        relativeLayout = getActivity().findViewById(R.id.layout_content);
+        relativeLayout2 = getActivity().findViewById(R.id.layout_title);
+        textView = getActivity().findViewById(R.id.banktransfer);
 
         ib_notif.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +111,19 @@ public class PayMethodFragment extends Fragment {
                     mBadge.setVisibility(View.VISIBLE);
                 }else{
                     mBadge.setVisibility(View.GONE);
+                }
+
+                if(dataSnapshot.child("theme").getValue().toString().equalsIgnoreCase("on")){
+                    if (getActivity()!=null){
+                        view.setBackgroundColor(getResources().getColor(R.color.colorDark));
+                        textView.setTextColor(Color.WHITE);
+                        relativeLayout.setBackground(getActivity().getDrawable(R.drawable.bg_btn_solid_black_stroke));
+                        relativeLayout2.setBackground(getActivity().getDrawable(R.drawable.bg_btn_solid_black_stroke));
+                    }
+                }else{
+                    if (getActivity() != null) {
+                        view.setBackgroundColor(getResources().getColor(R.color.colorLight));
+                    }
                 }
             }
 

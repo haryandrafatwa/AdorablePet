@@ -2,8 +2,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/white">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,7 +32,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Book"
+                    android:text="Confirmation"
                     android:layout_centerInParent="true"
                     android:textColor="@android:color/white"
                     android:textSize="24sp"
@@ -72,6 +71,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <RelativeLayout
+            android:id="@+id/layout_content1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/app_bar"
@@ -98,8 +98,7 @@
                     android:layout_height="wrap_content"
                     android:text="Silahkan melakukan pembayaran ke:"
                     android:textSize="18sp"
-                    android:fontFamily="@font/sf_pro_display_regular"
-                    android:textColor="@android:color/black"/>
+                    android:fontFamily="@font/sf_pro_display_regular"/>
 
                 <TextView
                     android:id="@+id/norekening"
@@ -108,7 +107,6 @@
                     android:text="No. Rekening"
                     android:layout_below="@id/silahkan"
                     android:fontFamily="@font/sf_pro_display_regular"
-                    android:textColor="@android:color/black"
                     android:layout_marginTop="16dp"/>
 
                 <TextView
@@ -117,7 +115,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/norekening"
                     android:fontFamily="@font/sf_pro_display_regular"
-                    android:textColor="@android:color/black"
                     android:padding="10dp"
                     android:background="@drawable/bg_edittext"/>
 
@@ -128,7 +125,6 @@
                     android:text="Atas Nama"
                     android:layout_below="@id/rekening"
                     android:fontFamily="@font/sf_pro_display_regular"
-                    android:textColor="@android:color/black"
                     android:layout_marginTop="16dp"/>
 
                 <TextView
@@ -138,7 +134,6 @@
                     android:text="PT ADORABLE PET"
                     android:layout_below="@id/atasnama"
                     android:fontFamily="@font/sf_pro_display_regular"
-                    android:textColor="@android:color/black"
                     android:padding="10dp"
                     android:background="@drawable/bg_edittext"/>
 
@@ -149,7 +144,6 @@
                     android:text="Bank"
                     android:layout_below="@id/as_rekening"
                     android:fontFamily="@font/sf_pro_display_regular"
-                    android:textColor="@android:color/black"
                     android:layout_marginTop="16dp"/>
 
                 <TextView
@@ -158,7 +152,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvbank"
                     android:fontFamily="@font/sf_pro_display_regular"
-                    android:textColor="@android:color/black"
                     android:padding="10dp"
                     android:background="@drawable/bg_edittext"/>
 
@@ -179,7 +172,6 @@
                     android:layout_height="wrap_content"
                     android:text="Total Pembayaran"
                     android:fontFamily="@font/sf_pro_display_regular"
-                    android:textColor="@android:color/black"
                     android:layout_marginTop="16dp"/>
 
                 <TextView
@@ -188,7 +180,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvtotalpembayaran"
                     android:fontFamily="@font/sf_pro_display_regular"
-                    android:textColor="@android:color/black"
                     android:padding="10dp"
                     android:background="@drawable/bg_edittext"/>
 

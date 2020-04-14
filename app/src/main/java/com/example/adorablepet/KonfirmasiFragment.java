@@ -1,6 +1,7 @@
 package com.example.adorablepet;
 
 import android.app.Dialog;
+import android.graphics.Color;
 import android.icu.text.NumberFormat;
 import android.icu.util.Currency;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,9 +39,10 @@ public class KonfirmasiFragment extends Fragment {
     private Toolbar toolbar;
     private ImageButton ib_back, ib_setting,ib_notif;
     private Button button;
-    private TextView rekening, bank, price;
+    private TextView rekening, bank, price,silahkan,norekening,atasnama,asrekening,tvbank,tvtotal;
 
     private String method;
+    private RelativeLayout relativeLayout,relativeLayout2;
 
     private DatabaseReference shelterRefs,userRefs;
     private String key;
@@ -66,6 +69,7 @@ public class KonfirmasiFragment extends Fragment {
 
     private void initialize(){
 
+        final View view = getView().getRootView();
         toolbar = getActivity().findViewById(R.id.toolbar_shelter);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity)getActivity()).setTitle("");
@@ -80,6 +84,14 @@ public class KonfirmasiFragment extends Fragment {
         ib_setting = getActivity().findViewById(R.id.ib_button_setting_shelter);
         ib_notif = getActivity().findViewById(R.id.ib_button_notification_shelter);
         mBadge = getActivity().findViewById(R.id.notif_badge);
+        relativeLayout = getActivity().findViewById(R.id.layout_title);
+        relativeLayout2 = getActivity().findViewById(R.id.layout_payment);
+        silahkan = getActivity().findViewById(R.id.silahkan);
+        norekening = getActivity().findViewById(R.id.norekening);
+        atasnama = getActivity().findViewById(R.id.atasnama);
+        asrekening = getActivity().findViewById(R.id.as_rekening);
+        tvbank = getActivity().findViewById(R.id.tvbank);
+        tvtotal = getActivity().findViewById(R.id.tvtotalpembayaran);
 
         ib_notif.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +109,26 @@ public class KonfirmasiFragment extends Fragment {
                     mBadge.setVisibility(View.VISIBLE);
                 }else{
                     mBadge.setVisibility(View.GONE);
+                }
+
+                if(dataSnapshot.child("theme").getValue().toString().equalsIgnoreCase("on")){
+                    if (getActivity() != null){
+                        view.setBackgroundColor(getActivity().getResources().getColor(R.color.colorDark));
+                        relativeLayout.setBackground(getActivity().getDrawable(R.drawable.bg_btn_solid_black_stroke));
+                        relativeLayout2.setBackground(getActivity().getDrawable(R.drawable.bg_btn_solid_black_stroke));
+                        bank.setTextColor(Color.WHITE);
+                        price.setTextColor(Color.WHITE);
+                        rekening.setTextColor(Color.WHITE);
+                        silahkan.setTextColor(Color.WHITE);
+                        norekening.setTextColor(Color.WHITE);
+                        asrekening.setTextColor(Color.WHITE);
+                        tvbank.setTextColor(Color.WHITE);
+                        tvtotal.setTextColor(Color.WHITE);
+                    }
+                }else{
+                    if (getActivity() != null){
+                        view.setBackgroundColor(getActivity().getResources().getColor(R.color.colorLight));
+                    }
                 }
             }
 
