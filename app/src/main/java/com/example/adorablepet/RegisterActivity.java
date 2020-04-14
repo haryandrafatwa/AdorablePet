@@ -130,6 +130,8 @@ public class RegisterActivity extends AppCompatActivity {
                         userMap.put("last_name",last);
                         userMap.put("phonenumber",telephone);
                         userMap.put("email",email);
+                        userMap.put("notif","on");
+                        userMap.put("theme","off");
                         userRefs.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
                             @Override
                             public void onComplete(Task task) {

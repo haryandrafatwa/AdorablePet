@@ -30,38 +30,52 @@
                 android:id="@+id/toolbar_main"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                android:background="@color/colorPrimary">
+                app:layout_scrollFlags="scroll|enterAlways"
+                android:theme="@style/ToolbarThemePrimary"
+                android:background="@color/colorPrimaryDark">
+
+                <ImageButton
+                    android:id="@+id/ib_button_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_settings"
+                    android:layout_centerVertical="true"
+                    android:backgroundTint="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shelter"
+                    android:layout_centerInParent="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/sf_pro_display_medium"/>
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="16dp">
-
-                    <ImageButton
-                        android:id="@+id/ib_button_setting"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_settings"
-                        android:layout_centerVertical="true"
-                        android:backgroundTint="@android:color/white"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Home"
-                        android:layout_centerInParent="true"
-                        android:textColor="@android:color/white"
-                        android:textSize="24sp"
-                        android:fontFamily="@font/sf_pro_display_medium"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginRight="16dp">
 
                     <ImageButton
                         android:id="@+id/ib_button_notification"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/ic_notifications"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
                         android:backgroundTint="@android:color/white"/>
+
+                    <com.nex3z.notificationbadge.NotificationBadge
+                        android:id="@+id/notif_badge_main"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_toRightOf="@id/ib_button_notification"
+                        android:layout_alignTop="@id/ib_button_notification"
+                        android:layout_marginLeft="-16dp"
+                        android:layout_marginTop="-3dp"
+                        app:badgeTextSize="6sp"
+                        app:badgeBackground="@drawable/bg_badge"
+                        app:maxTextLength="2"/>
 
                 </RelativeLayout>
 

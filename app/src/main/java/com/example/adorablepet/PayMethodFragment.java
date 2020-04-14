@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.icu.text.NumberFormat;
+import android.icu.util.Currency;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,17 +28,34 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.nex3z.notificationbadge.NotificationBadge;
+
+import java.util.HashMap;
 
 public class PayMethodFragment extends Fragment {
 
     private BottomNavigationView bottomNavigationView;
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
     private Toolbar toolbar;
-    private ImageButton ib_back;
+    private ImageButton ib_back, ib_setting,ib_notif;
 
     private CardView mandiri,bni,bca,bri;
+    private Bundle bundle;
+    private HashMap hashMap;
+    private String price;
+
+    private NotificationBadge mBadge;
+    private int numOfNotif;
+
+    private DatabaseReference shelterRefs,userRefs;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,20 +76,75 @@ public class PayMethodFragment extends Fragment {
 
     private void initialize(){
 
-        drawerLayout = getActivity().findViewById(R.id.drawer_layout);
         toolbar = getActivity().findViewById(R.id.toolbar_shelter);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).setTitle("");
+
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavBar);
         bottomNavigationView.setVisibility(View.GONE);
 
-        actionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(),drawerLayout,toolbar,R.string.drawer_opened,R.string.drawer_closed);
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-
-        ((AppCompatActivity)getActivity()).setTitle("");
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         ib_back = getActivity().findViewById(R.id.ib_back);
+        ib_setting = getActivity().findViewById(R.id.ib_button_setting_shelter);
+        ib_notif = getActivity().findViewById(R.id.ib_button_notification_shelter);
+        mBadge = getActivity().findViewById(R.id.notif_badge);
+
+        ib_notif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NotifikasiFragment notifikasiFragment = new NotifikasiFragment();
+                setFragmentNotif(notifikasiFragment);
+            }
+        });
+
+        userRefs = FirebaseDatabase.getInstance().getReference().child("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        userRefs.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("notif").getValue().toString().equalsIgnoreCase("on")){
+                    mBadge.setVisibility(View.VISIBLE);
+                }else{
+                    mBadge.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        shelterRefs = FirebaseDatabase.getInstance().getReference().child("Shelter").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        shelterRefs.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getChildrenCount() != 0){
+                    numOfNotif=0;
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        if (!snapshot.child("status").getValue().toString().equals("Pending")){
+                            if(snapshot.hasChild("read") && snapshot.hasChild("date")){
+                                if (snapshot.child("read").getValue().toString().equals("false")){
+                                    numOfNotif++;
+                                }
+                            }
+                        }
+                    }
+                }
+                mBadge.setNumber(numOfNotif);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        ib_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SettingFragment settingFragment = new SettingFragment();
+                setFragmentNotif(settingFragment);
+            }
+        });
 
         ib_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,37 +158,48 @@ public class PayMethodFragment extends Fragment {
         bri = getActivity().findViewById(R.id.bri);
         bni = getActivity().findViewById(R.id.bni);
 
+        bundle = getArguments();
+        hashMap = (HashMap) bundle.getSerializable("bookMap");
+
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        format.setMaximumFractionDigits(0);
+        format.setCurrency(Currency.getInstance("IDR"));
+        String formattedNumber = format.format(Integer.valueOf(hashMap.get("totalPrice").toString()));
+        String rupiah = formattedNumber.replaceAll("IDR","Rp");
+        String titik = rupiah.replaceAll("[,]",".");
+        price = titik;
+
         mandiri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initializeDialogPayNow("Mandiri","Rp1.000.000");
+                initializeDialogPayNow("Mandiri",price,hashMap);
             }
         });
 
         bni.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initializeDialogPayNow("BNI","Rp1.000.000");
+                initializeDialogPayNow("BNI",price,hashMap);
             }
         });
 
         bri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initializeDialogPayNow("BRI","Rp1.000.000");
+                initializeDialogPayNow("BRI",price,hashMap);
             }
         });
 
         bca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initializeDialogPayNow("BCA","Rp1.000.000");
+                initializeDialogPayNow("BCA",price,hashMap);
             }
         });
 
     }
 
-    private void initializeDialogPayNow(String payMethod, String totalPayment){
+    private void initializeDialogPayNow(final String payMethod, String totalPayment, final HashMap hashMap){
         final Dialog dialog1 = new Dialog(getActivity(),R.style.CustomAlertDialog);
         dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog1.getWindow().setBackgroundDrawable(getActivity().getDrawable(R.drawable.bg_btn_solid_white));
@@ -140,9 +225,27 @@ public class PayMethodFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                KonfirmasiFragment konfirmasiFragment = new KonfirmasiFragment();
-                setFragment(konfirmasiFragment);
-                dialog1.cancel();
+
+                shelterRefs.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        hashMap.put("payMethod",payMethod);
+                        hashMap.put("status","Pending");
+                        shelterRefs.child(dataSnapshot.getChildrenCount()+"").updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
+                            @Override
+                            public void onComplete(@NonNull Task task) {
+                                KonfirmasiFragment konfirmasiFragment = new KonfirmasiFragment();
+                                setFragment(konfirmasiFragment);
+                                dialog1.cancel();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
@@ -158,6 +261,13 @@ public class PayMethodFragment extends Fragment {
         ShelterFragment shelterFragment = new ShelterFragment();
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frameFragment,shelterFragment).addToBackStack(null);
+        fragmentTransaction.replace(R.id.frameFragment,fragment).addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    private void setFragmentNotif(Fragment fragment) // fungsi buat pindah - pindah fragment
+    {
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frameFragment,fragment).addToBackStack(null);
         fragmentTransaction.commit();
     }

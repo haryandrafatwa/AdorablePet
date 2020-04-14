@@ -10,7 +10,7 @@
     <!-- White foreground. -->
     <item android:bottom="1dp" android:right="1dp">
         <shape>
-            <solid android:color="@color/colorPrimary" />
+            <solid android:color="@color/colorPrimaryDark" />
             <corners android:radius="20dp" />
         </shape>
     </item>

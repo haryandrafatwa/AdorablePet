@@ -21,16 +21,25 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 public class ShelterFragment extends Fragment {
 
     private BottomNavigationView bottomNavigationView;
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
     private Toolbar toolbar;
-    private ImageButton ib_back;
+    private ImageButton ib_back, ib_setting,ib_notif;
 
     private Button button;
+    private NotificationBadge mBadge;
+    private int numOfNotif;
+
+    private DatabaseReference shelterRefs,userRefs;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,21 +67,34 @@ public class ShelterFragment extends Fragment {
 
     private void initialize(){
 
-        drawerLayout = getActivity().findViewById(R.id.drawer_layout);
         toolbar = getActivity().findViewById(R.id.toolbar_shelter);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).setTitle("");
+
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavBar);
         bottomNavigationView.setVisibility(View.VISIBLE);
 
-        actionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(),drawerLayout,toolbar,R.string.drawer_opened,R.string.drawer_closed);
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-
-        ((AppCompatActivity)getActivity()).setTitle("");
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         button = getActivity().findViewById(R.id.btnBookNow);
         ib_back = getActivity().findViewById(R.id.ib_back);
+        ib_setting = getActivity().findViewById(R.id.ib_button_setting_shelter);
+        ib_notif = getActivity().findViewById(R.id.ib_button_notification_shelter);
+        mBadge = getActivity().findViewById(R.id.notif_badge);
+
+        ib_notif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NotifikasiFragment notifikasiFragment = new NotifikasiFragment();
+                setFragment(notifikasiFragment);
+            }
+        });
+
+        ib_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SettingFragment settingFragment = new SettingFragment();
+                setFragment(settingFragment);
+            }
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +108,66 @@ public class ShelterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 setActivity(MainActivity.class);
+            }
+        });
+
+        shelterRefs = FirebaseDatabase.getInstance().getReference().child("Shelter").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        shelterRefs.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getChildrenCount() != 0){
+                    numOfNotif=0;
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        if (snapshot.child("status").getValue().toString().equals("Pending")){
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    KonfirmasiFragment konfirmasiFragment = new KonfirmasiFragment();
+                                    setFragment(konfirmasiFragment);
+                                }
+                            });
+                        }else{
+                            if (snapshot.hasChild("read") && snapshot.hasChild("date")){
+                                if (snapshot.child("read").getValue().toString().equals("false")){
+                                    numOfNotif++;
+                                }
+                            }
+                        }
+                        button.setVisibility(View.VISIBLE);
+                    }
+                }else{
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            BookFragment bookFragment = new BookFragment();
+                            setFragment(bookFragment);
+                        }
+                    });
+                    button.setVisibility(View.VISIBLE);
+                }
+                mBadge.setNumber(numOfNotif);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        userRefs = FirebaseDatabase.getInstance().getReference().child("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        userRefs.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("notif").getValue().toString().equalsIgnoreCase("on")){
+                    mBadge.setVisibility(View.VISIBLE);
+                }else{
+                    mBadge.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 

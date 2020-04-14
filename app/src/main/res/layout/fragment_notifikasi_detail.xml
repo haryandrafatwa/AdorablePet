@@ -1,82 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@android:color/white">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_shelter"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways"
-            android:theme="@style/ToolbarThemePrimary">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Booking Detail"
-                android:layout_centerInParent="true"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"
-                android:layout_gravity="center"
-                android:fontFamily="@font/sf_pro_display_medium"/>
-
-            <ImageButton
-                android:id="@+id/ib_button_notification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_notifications"
-                android:layout_gravity="end"
-                android:layout_marginRight="16dp"
-                android:backgroundTint="@android:color/white"/>
-
-        </androidx.appcompat.widget.Toolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/app_bar"
-        android:padding="16dp">
+        android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/ib_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_arrow_left"/>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_setting"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@android:color/white">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="16dp">
+
+                <ImageButton
+                    android:id="@+id/ib_back"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_arrow_left"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notification"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/sf_pro_display_medium"/>
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ib_back"
-            android:paddingVertical="16dp">
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@drawable/dog"/>
+            android:layout_below="@id/toolbar_setting"
+            android:padding="16dp">
 
             <RelativeLayout
-                android:id="@+id/main_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/image">
+                android:background="@drawable/bg_btn_solid_white_stroke"
+                android:padding="16dp">
+
+                <RelativeLayout
+                    android:id="@+id/layout_atas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/notif_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Verifikasi Pembayaran"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/sf_pro_display_regular"/>
+
+                    <TextView
+                        android:id="@+id/notif_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/sf_pro_display_regular"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/notif_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layout_atas"
+                    android:text="Pembayaran untuk transaksi penitipan peliharaan dengan detail berikut telah diverifikasi oleh kami."
+                    android:layout_marginTop="16dp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"/>
+
+                <TextView
+                    android:id="@+id/notif_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layout_atas"
+                    android:text="Pembayaran untuk transaksi penitipan peliharaan dengan detail berikut telah diverifikasi oleh kami."
+                    android:layout_marginTop="16dp"
+                    android:textColor="@android:color/black"
+                    android:justificationMode="inter_word"/>
 
                 <LinearLayout
                     android:id="@+id/layout_package"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:weightSum="10"
-                    android:background="@drawable/bg_edittext"
+                    android:layout_below="@id/notif_content"
+                    android:layout_marginTop="16dp"
                     android:padding="6dp">
 
                     <TextView
@@ -91,7 +118,7 @@
                         android:id="@+id/tv_package"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Package"
+                        android:text=""
                         android:layout_weight="6.5"
                         android:textColor="@android:color/black"
                         android:fontFamily="@font/sf_pro_display_regular"/>
@@ -105,7 +132,6 @@
                     android:layout_below="@id/layout_package"
                     android:weightSum="10"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_edittext"
                     android:padding="6dp">
 
                     <TextView
@@ -120,7 +146,7 @@
                         android:id="@+id/tv_quantity"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Adult Cat - 1"
+                        android:text=""
                         android:layout_weight="6.5"
                         android:textColor="@android:color/black"
                         android:fontFamily="@font/sf_pro_display_regular"/>
@@ -134,7 +160,6 @@
                     android:layout_below="@id/layout_quantity"
                     android:weightSum="10"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_edittext"
                     android:padding="6dp">
 
                     <TextView
@@ -146,10 +171,10 @@
                         android:fontFamily="@font/sf_pro_display_regular"/>
 
                     <TextView
-                        android:id="@+id/tv_duration"
+                        android:id="@+id/tv_date"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="05/02/2020 - 06/02/2020"
+                        android:text=""
                         android:layout_weight="6.5"
                         android:textColor="@android:color/black"
                         android:textSize="12sp"
@@ -163,7 +188,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/layout_duration"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_edittext"
                     android:padding="6dp"
                     android:orientation="vertical">
 
@@ -179,52 +203,44 @@
                         android:id="@+id/tv_information"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Memiliki alergi setiap makanan yang mengandung kalsium"
                         android:textColor="@android:color/black"
                         android:textSize="12sp"
                         android:fontFamily="@font/sf_pro_display_regular"
                         android:layout_marginTop="8dp"
+                        android:background="@android:color/transparent"
+                        android:inputType="textMultiLine"
                         android:justificationMode="inter_word"/>
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/layout_proof"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Total Payment"
                     android:layout_below="@id/layout_information"
-                    android:textColor="@android:color/black"
-                    android:fontFamily="@font/sf_pro_display_medium"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="8dp"
+                    android:padding="6dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_total_payment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rp200.000"
-                    android:layout_below="@id/layout_information"
-                    android:textColor="@android:color/black"
-                    android:fontFamily="@font/sf_pro_display_medium"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="8dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Transaction Evidence:"
+                        android:layout_weight="3.5"
+                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/sf_pro_display_regular"/>
+
+                    <ImageView
+                        android:id="@+id/iv_proof"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
 
             </RelativeLayout>
-
-            <Button
-                android:id="@+id/btnSelectMethod"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="Select Payment Method"
-                android:textAllCaps="false"
-                android:background="@drawable/bg_btn_solid_primary"
-                android:layout_below="@id/main_layout"
-                android:textSize="18sp"
-                android:textColor="@android:color/white"
-                android:fontFamily="@font/sf_pro_display_semibold"
-                android:layout_marginTop="16dp"/>
 
         </RelativeLayout>
 
     </RelativeLayout>
 
-</RelativeLayout>
+</androidx.core.widget.NestedScrollView>

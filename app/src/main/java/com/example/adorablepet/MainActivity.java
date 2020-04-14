@@ -1,5 +1,6 @@
 package com.example.adorablepet;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
@@ -13,7 +14,13 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.List;
 
@@ -22,9 +29,13 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     public static Context contextOfApplication;
     private NestedScrollView nestedScrollView;
-    private ImageButton ib_setting;
+    private ImageButton ib_setting,ib_notif;
+    private NotificationBadge mBadge;
 
     private RelativeLayout shelter;
+    private int numOfNotif;
+
+    private DatabaseReference userRefs,shelterRefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +94,41 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SettingFragment settingFragment = new SettingFragment();
                 setFragment(settingFragment);
+            }
+        });
+
+        ib_notif = findViewById(R.id.ib_button_notification);
+        mBadge = findViewById(R.id.notif_badge_main);
+        ib_notif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NotifikasiFragment notifikasiFragment = new NotifikasiFragment();
+                setFragment(notifikasiFragment);
+            }
+        });
+
+        shelterRefs = FirebaseDatabase.getInstance().getReference().child("Shelter").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        shelterRefs.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getChildrenCount() != 0){
+                    numOfNotif=0;
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        if (!snapshot.child("status").getValue().toString().equals("Pending")){
+                            if(snapshot.hasChild("read") && snapshot.hasChild("date")){
+                                if (snapshot.child("read").getValue().toString().equals("false")){
+                                    numOfNotif++;
+                                }
+                            }
+                        }
+                    }
+                }
+                mBadge.setNumber(numOfNotif);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 
