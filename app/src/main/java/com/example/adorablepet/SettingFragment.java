@@ -1,19 +1,28 @@
 package com.example.adorablepet;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,6 +39,9 @@ public class SettingFragment extends Fragment {
     private ImageButton ib_back;
     private SwitchCompat sw_notif, sw_night;
     private View view;
+    private Button button;
+    private TextView notifikasi,nightmode;
+    private RelativeLayout rel1,rel2;
 
     private DatabaseReference userRefs;
 
@@ -70,6 +82,11 @@ public class SettingFragment extends Fragment {
         sw_notif = getActivity().findViewById(R.id.switch_notif_setting);
         sw_night = getActivity().findViewById(R.id.switch_night_setting);
         ib_back = getActivity().findViewById(R.id.ib_back);
+        button = getActivity().findViewById(R.id.btnLogout);
+        notifikasi = getActivity().findViewById(R.id.notifikasi);
+        nightmode = getActivity().findViewById(R.id.nightmode);
+        rel1 = getActivity().findViewById(R.id.layout_notf);
+        rel2 = getActivity().findViewById(R.id.layout_night);
 
         ib_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,17 +149,47 @@ public class SettingFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     userRefs.child("theme").setValue("on");
-                    if (getActivity()!= null){
-                        view.setBackgroundColor(getActivity().getColor(R.color.colorDark));
-                    }
                 }else{
                     userRefs.child("theme").setValue("off");
-                    if (getActivity()!= null){
-                        view.setBackgroundColor(getActivity().getColor(R.color.colorLight));
-                    }
                 }
             }
         });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertsignout();
+            }
+        });
+
+    }
+
+    public void alertsignout(){ // fungsi untuk membuat alert dialog ketika ingin logout
+        AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(getActivity());
+
+        // Setting Dialog Title
+        alertDialog2.setTitle("Exit Confirmation");
+
+        alertDialog2.setCancelable(false);
+
+        // Setting Dialog Message
+        alertDialog2.setMessage("Are you sure want to log out?");
+
+        // Setting Positive "Yes" Btn
+        alertDialog2.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // Write your code here to execute after dialog
+                FirebaseAuth.getInstance().signOut();
+                setActivity(LoginActivity.class);
+            }
+        });
+
+        alertDialog2.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alertDialog2.show();
 
     }
 
