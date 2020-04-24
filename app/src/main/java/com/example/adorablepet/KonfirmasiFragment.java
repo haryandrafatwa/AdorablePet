@@ -208,6 +208,7 @@ public class KonfirmasiFragment extends Fragment {
                         String titik = rupiah.replaceAll("[,]",".");
                         price.setText(titik);
 
+                        //kondisional untuk nomor rekening sesuai dengan bank yang dipilih sebelumnya
                         if(method.equals("Mandiri")){
                             rekening.setText("012-00-0184334-2");
                         }else if(method.equals("BCA")){

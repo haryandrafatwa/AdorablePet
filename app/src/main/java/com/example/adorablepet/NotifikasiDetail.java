@@ -53,6 +53,7 @@ public class NotifikasiDetail extends Fragment {
 
     private void initialize(){
 
+        //class ini hanya menampilkan data berdasarkan item yang dipilih pada recycler view
         tv_additional = getActivity().findViewById(R.id.tv_information);
         tv_date = getActivity().findViewById(R.id.notif_date);
         tv_duration = getActivity().findViewById(R.id.tv_date);

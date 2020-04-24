@@ -69,6 +69,7 @@ public class ShelterFragment extends Fragment {
         initialize();
     }
 
+    //method untuk menginisiasi semua objek yang ada pada halaman ini beserta dengan ketika ada button yang diclick
     private void initialize(){
 
         view = getView().getRootView();
@@ -118,6 +119,7 @@ public class ShelterFragment extends Fragment {
             }
         });
 
+        //code untuk mengambil status notifikasi, yg berguna untuk menghitung banyaknya notif yang terbaca / yg belum terbaca
         shelterRefs = FirebaseDatabase.getInstance().getReference().child("Shelter").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         shelterRefs.addValueEventListener(new ValueEventListener() {
             @Override
@@ -125,6 +127,7 @@ public class ShelterFragment extends Fragment {
                 if (dataSnapshot.getChildrenCount() != 0){
                     numOfNotif=0;
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        //kondisi untuk mengecek apakah ada transaksi yang sedang berlansung atau tidak, jika iyaa ketika button book ditekan, maka sistem akan menampilkan konfirmasi pembayaran
                         if (snapshot.child("status").getValue().toString().equals("Pending")){
                             button.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -142,7 +145,7 @@ public class ShelterFragment extends Fragment {
                         }
                         button.setVisibility(View.VISIBLE);
                     }
-                }else{
+                }else{ //jika tidak, maka sistem akan menampilkan form book
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -161,23 +164,24 @@ public class ShelterFragment extends Fragment {
             }
         });
 
+        //mengambil informasi dari firebase, apakah user menyalakan notifnya atau tidak, dan apakah user menggunakan tema malam atau tidak
         userRefs = FirebaseDatabase.getInstance().getReference().child("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         userRefs.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.child("notif").getValue().toString().equalsIgnoreCase("on")){
-                    mBadge.setVisibility(View.VISIBLE);
+                    mBadge.setVisibility(View.VISIBLE); //menyalakan notif
                 }else{
-                    mBadge.setVisibility(View.GONE);
+                    mBadge.setVisibility(View.GONE); //mematikan notif
                 }
 
                 if(dataSnapshot.child("theme").getValue().toString().equalsIgnoreCase("on")){
                     if (getActivity() != null) {
-                        view.setBackgroundColor(getResources().getColor(R.color.colorDark));
+                        view.setBackgroundColor(getResources().getColor(R.color.colorDark)); //menyalakan tema malam
                     }
                 }else{
                     if (getActivity() != null) {
-                        view.setBackgroundColor(getResources().getColor(R.color.colorLight));
+                        view.setBackgroundColor(getResources().getColor(R.color.colorLight)); //mematikan tema malam
                     }
                 }
             }
@@ -190,6 +194,7 @@ public class ShelterFragment extends Fragment {
 
     }
 
+    // sama seperti setfragment, yg membedakan method ini untuk activity, bukan untuk fragment
     private void setActivity(Class activity) { // fungsi untuk kelarin activity terakhir, dan diganti ke activity baru trus dikirim ke halaman login
         Intent mainIntent = new Intent(getActivity(), activity);
         mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -107,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
             mDialog.setTitle("Sign In");
             mDialog.show();
 
+            //method bawaan dari firebase auth untuk melakukan proses sign in menggunakan email dan password yang telah didaftarkan
             mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(Task<AuthResult> task) {

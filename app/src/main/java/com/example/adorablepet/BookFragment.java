@@ -122,6 +122,7 @@ public class BookFragment extends Fragment {
                 }
 
 
+                //ketika tema malam dinyalakan, maka tulisan serta background halaman akan disesuaikan menjadi tema malam
                 if(dataSnapshot.child("theme").getValue().toString().equalsIgnoreCase("on")){
                     if (getActivity()!=null){
                         view.setBackgroundColor(getResources().getColor(R.color.colorDark));
@@ -181,8 +182,10 @@ public class BookFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //ini kondisi pengecekan apakan inputan sudah terisi semua atau tidak.
                 if(!et_duration.getText().toString().equals("Duration") && !et_package.getText().toString().equals("Package") && !et_quantity.getText().toString().equals("Quantity")){
 
+                    //kondisi pengecekan quantity, mengalikan sebanyak quantity
                     if(quanPrice == 1){
                         totPrice = packPrice+durPrice;
                     }else if(quanPrice == 2){
@@ -190,8 +193,12 @@ public class BookFragment extends Fragment {
                     }else if(quanPrice == 3){
                         totPrice = (packPrice+durPrice)*3;
                     }
+
+                    //membuat argument(variabel yg dapat dikirim)
                     Bundle bundle = new Bundle();
                     HashMap bookMap = new HashMap();
+
+                    //membuat objek bookmap untuk menampung data dari hasil form book
                     bookMap.put("quantity",et_quantity.getText().toString());
                     bookMap.put("duration",et_duration.getText().toString());
                     bookMap.put("package",et_package.getText().toString());
@@ -199,6 +206,7 @@ public class BookFragment extends Fragment {
                     bundle.putSerializable("bookMap",bookMap);
                     BookDetailFragment bookDetailFragment = new BookDetailFragment();
                     bookDetailFragment.setArguments(bundle);
+                    //mengirimkan object bookmap ke halaman book detail
                     setFragment(bookDetailFragment);
                 }else{
                     Toast.makeText(getActivity(), "Silahkan isi dengan lengkap form booking terlebih dahulu!", Toast.LENGTH_SHORT).show();
@@ -213,18 +221,22 @@ public class BookFragment extends Fragment {
             }
         });
 
+        //data untuk dropdown package
         String[] entriesPackages = new String[]{
                 "Package", "Package 1", "Package 2", "Package 3"
         };
 
+        //data untuk dropdown quantity
         String[] quantityPackages = new String[]{
                 "Quantity","1 Hewan", "2 Hewan", "3 Hewan"
         };
 
+        //data untuk duration package
         String[] durationPackages = new String[]{
                 "Duration", "3 Jam", "5 Jam", "12 Jam", "1 Hari","3 Hari","5 Hari","1 Minggu"
         };
 
+        //proses inisiasi dropdown package beserta kondisional setiap datanya
         spinnerPackage = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner, entriesPackages);
         spinnerPackage.setDropDownViewResource(R.layout.item_spinner);
         packages.setAdapter(spinnerPackage);
@@ -252,6 +264,7 @@ public class BookFragment extends Fragment {
             }
         });
 
+        //proses inisiasi dropdown duration beserta kondisional setiap datanya
         spinnerDuration = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner, durationPackages);
         spinnerDuration.setDropDownViewResource(R.layout.item_spinner);
         duration.setAdapter(spinnerDuration);
@@ -285,6 +298,7 @@ public class BookFragment extends Fragment {
             }
         });
 
+        //proses inisiasi dropdown quantity beserta kondisional setiap datanya
         spinnerQuantity = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner, quantityPackages);
         spinnerQuantity.setDropDownViewResource(R.layout.item_spinner);
         quantity.setAdapter(spinnerQuantity);

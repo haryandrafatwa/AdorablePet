@@ -33,6 +33,7 @@ public class NotifikasiAdapter extends RecyclerView.Adapter<NotifikasiAdapter.Vi
     private FragmentActivity mActivity;
 
 
+    //ini konstruktor dari class notifikasi adapter
     public NotifikasiAdapter(List<NotifikasiModel> mLists, Context mContext, FragmentActivity mActivity) {
         this.mLists = mLists;
         this.mContext = mContext;
@@ -55,6 +56,7 @@ public class NotifikasiAdapter extends RecyclerView.Adapter<NotifikasiAdapter.Vi
         final int position = i;
         final NotifikasiModel model = mLists.get(i);
 
+        //kondisi untuk mengecek apakah notif sudah terbaca atau belum
         if (model.getRead()){
             viewHolder.badge.setVisibility(View.GONE);
             viewHolder.textView.setVisibility(View.VISIBLE);
@@ -63,6 +65,7 @@ public class NotifikasiAdapter extends RecyclerView.Adapter<NotifikasiAdapter.Vi
             viewHolder.badge.setVisibility(View.VISIBLE);
         }
 
+        //ini proses ketika item yang ada pada recycler view kita tekan, dan langsung mengarahkan ke notifikasi detail beserta menginisiasi setiap object yg ada pada halaman notif detail
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +99,7 @@ public class NotifikasiAdapter extends RecyclerView.Adapter<NotifikasiAdapter.Vi
         return mLists.size();
     }
 
+    //ini merupakan class untuk menampung object yang ada pada item recycler view
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textView;

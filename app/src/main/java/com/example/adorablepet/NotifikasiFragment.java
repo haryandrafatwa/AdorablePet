@@ -74,6 +74,7 @@ public class NotifikasiFragment extends Fragment {
 
         initRecyclerView();
 
+        //proses pengambildan data dari database terhadap data transaksi shelter yang akan ditampilkan di recycler view
         transaksiRefs = FirebaseDatabase.getInstance().getReference().child("Shelter").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         transaksiRefs.addValueEventListener(new ValueEventListener() {
             @Override
@@ -82,7 +83,6 @@ public class NotifikasiFragment extends Fragment {
                     mLists.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                         if (snapshot.hasChild("read") && snapshot.hasChild("date")){
-                            Log.d("CHECKINGMETHOD",snapshot.child("date").getValue().toString());
                             mLists.add(new NotifikasiModel(snapshot.getKey(),snapshot.child("additional").getValue().toString(),snapshot.child("buktiTransaksi").getValue().toString(),snapshot.child("date").getValue().toString(),
                                     snapshot.child("duration").getValue().toString(),snapshot.child("package").getValue().toString(), snapshot.child("payMethod").getValue().toString(), snapshot.child("quantity").getValue().toString(),
                                     Boolean.valueOf(snapshot.child("read").getValue().toString()),Integer.valueOf(snapshot.child("totalPrice").getValue().toString())));
@@ -112,6 +112,7 @@ public class NotifikasiFragment extends Fragment {
 
     }
 
+    //method untuk menginisiasi recycler view
     public void initRecyclerView() {
         mRecyclerView = getActivity().findViewById(R.id.rvListNotifikasi);
         mAdapter = new NotifikasiAdapter(mLists,getActivity().getApplicationContext(),getActivity());

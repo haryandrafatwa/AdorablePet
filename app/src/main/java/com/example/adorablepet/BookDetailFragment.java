@@ -144,11 +144,14 @@ public class BookDetailFragment extends Fragment {
             }
         });
 
+
+        //proses menerima object hasil kiriman dari fragment sebelumnya
         bundle = this.getArguments();
         final HashMap hashMap = (HashMap) bundle.getSerializable("bookMap");
         tv_package.setText(hashMap.get("package").toString());
         tv_quantity.setText(hashMap.get("quantity").toString());
 
+        //proses conver dari integer biasa menjadi format rupiah
         NumberFormat format = NumberFormat.getCurrencyInstance();
         format.setMaximumFractionDigits(0);
         format.setCurrency(Currency.getInstance("IDR"));
@@ -157,6 +160,7 @@ public class BookDetailFragment extends Fragment {
         String titik = rupiah.replaceAll("[,]",".");
         tv_totprice.setText(titik);
 
+        //kondisi setiap duration hasil dari form book dengan mengambil waktu sekarang
         if (hashMap.get("duration").toString().equals("3 Jam"))   {
             Date c = Calendar.getInstance().getTime();
             Date cTemp = Calendar.getInstance().getTime();

@@ -209,6 +209,7 @@ public class UploadFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //kondisi untuk mengecek apakah user telah memilih foto yang akan di upload atau belum
                 if (filePath != null){
                     uploadImage();
                 }else{
@@ -225,7 +226,9 @@ public class UploadFragment extends Fragment {
         });
     }
 
+    //method untuk proses upload foto ke firebase storage dan firebase database
     private void uploadImage(){
+        //menggunakan progress dialog agar ketika foto dikirimkan ke firebase storage, proses pengiriman akan terlihat
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("Uploading...");
         progressDialog.show();
@@ -235,10 +238,11 @@ public class UploadFragment extends Fragment {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         progressDialog.dismiss();
+                        //proses mengambil link download foto yang telah berhasil di upload ke firebase storage
                         imageRefs.child("buktiTransaksi.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                databaseReference.child("buktiTransaksi").setValue(uri.toString());
+                                databaseReference.child("buktiTransaksi").setValue(uri.toString()); //menyimpan link download tersebut ke firebase database
                                 databaseReference.child("status").setValue("Done");
                                 databaseReference.child("read").setValue(false);
                                 Date c = Calendar.getInstance().getTime();
@@ -270,6 +274,7 @@ public class UploadFragment extends Fragment {
                 });
     }
 
+    //method ketika proses upload telah selesai
     private void initializeDialogDone(){
         final Dialog dialog1 = new Dialog(getActivity(),R.style.CustomAlertDialog);
         dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -291,6 +296,7 @@ public class UploadFragment extends Fragment {
         dialog1.show();
     }
 
+    //method untuk memilih apakah user ingin memilih foto dari galeri atau dari camera langsung
     private void initializeDialogTakeImage(){
         final Dialog dialog1 = new Dialog(getActivity(),R.style.CustomAlertDialog);
         dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -320,6 +326,7 @@ public class UploadFragment extends Fragment {
         dialog1.show();
     }
 
+    //method untuk memeriksa apakah device telah memberikan hak akses kepada aplikasi untuk menggunakan camera nya atau tidak, jika sudah diberikan akses, maka sistem akan beralih ke camera
     private void dispatchTakePictureIntent() {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 1);
@@ -335,6 +342,7 @@ public class UploadFragment extends Fragment {
 
     }
 
+    //method penurunan dari intent, untuk mengambil hasil foto yang telah dipilih dari galeri atau hasil foto dari camera dan langsung ditampilkan pada image view yang ada pada halaman.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -366,6 +374,7 @@ public class UploadFragment extends Fragment {
         }
     }
 
+    //method untuk mendapatkan absolute path dari abstract path terhadap foto yang telah dipilih
     public File getPhotoFileUri(String fileName) {
         File mediaStorageDir = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
 
@@ -378,6 +387,7 @@ public class UploadFragment extends Fragment {
         return file;
     }
 
+    //method untuk menampilkan foto2 yang ada pada galeri
     private void choosePhotoFromGallery() {
         Intent intent = new Intent();
         intent.setType("image/*");

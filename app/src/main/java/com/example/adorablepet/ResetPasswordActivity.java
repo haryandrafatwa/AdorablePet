@@ -57,6 +57,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         }
         else
         {
+            //ini merupakan method bawaan dari firebase auth untuk mengirim link reset password ke email yang didaftarkan
             mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(Task<Void> task) {
@@ -73,6 +74,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         }
     }
 
+    //method untuk menampilkan pop up, pesan dialog ketika ingin mereset password
     public void alertReset(){ // fungsi untuk membuat alert dialog ketika ingin logout
         AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(this);
 

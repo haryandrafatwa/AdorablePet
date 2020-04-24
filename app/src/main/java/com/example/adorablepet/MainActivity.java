@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         contextOfApplication = getApplicationContext();
 
+
+        //inisiasi objek pada halaman ini
         setContentView(R.layout.activity_main);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavBar);
         bottomNavigationView.setItemIconTintList(null);
@@ -51,12 +53,14 @@ public class MainActivity extends AppCompatActivity {
         layout_menu = findViewById(R.id.layout_menu);
         nestedScrollView.setVisibility(View.VISIBLE);
 
+        //inisiasi halaman yang ada pada bottom navigation view
         final LostFragment lostFragment = new LostFragment();
         final AdoptFragment adoptFragment = new AdoptFragment();
         final CareFragment careFragment = new CareFragment();
         final DonateFragment donateFragment = new DonateFragment();
         final ShelterFragment shelterFragment = new ShelterFragment();
 
+        //proses inisiasi bottom navigation view, jika icon diklik, maka akan ke halaman tersebut
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
         {
             @Override
@@ -90,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        //inisiasi objek image button setting dan menginisiasi ketika button di klik, yaitu pindah ke halaman setting
         ib_setting = findViewById(R.id.ib_button_setting);
         ib_setting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //inisiasi objek image button notif dan menginisiasi ketika button di klik, yaitu pindah ke halaman notif
         ib_notif = findViewById(R.id.ib_button_notification);
         mBadge = findViewById(R.id.notif_badge_main);
         ib_notif.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //code untuk mengambil status notifikasi, yg berguna untuk menghitung banyaknya notif yang terbaca / yg belum terbaca
         shelterRefs = FirebaseDatabase.getInstance().getReference().child("Shelter").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         shelterRefs.addValueEventListener(new ValueEventListener() {
             @Override
@@ -135,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //inisiasi button shelter, dan inisiasi ketika button di klik, yaitu pindah ke halaman shelter
         shelter = findViewById(R.id.btnShelter);
         shelter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //mengambil informasi dari firebase, apakah user menyalakan notifnya atau tidak, dan apakah user menggunakan tema malam atau tidak
         userRefs = FirebaseDatabase.getInstance().getReference().child("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         userRefs.addValueEventListener(new ValueEventListener() {
             @Override
@@ -170,6 +179,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    //method untuk pindah - pindah ke halaman lain
     public void setFragment(Fragment fragment)
     {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

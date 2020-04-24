@@ -68,6 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        //proses pengecekan apakah pada inputan email terdapat karakter '@' dan juga '.'
         et_email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -116,6 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
             mDialog.setMessage("Wait a minute .. ");
             mDialog.show();
 
+            //method bawaan dari firebase auth untuk melakukan pendaftaran menggunakan email dan password
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(Task<AuthResult> task) {

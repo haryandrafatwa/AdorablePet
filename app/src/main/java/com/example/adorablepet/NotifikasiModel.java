@@ -1,5 +1,6 @@
 package com.example.adorablepet;
 
+//ini merupakan class NotifikasiModel untuk menampung model/object/variabel yang dibutuhkan pada halaman notifikasi
 public class NotifikasiModel {
 
     private String id,additionalInformation, imageURL, date, duration, packages, payMethod, quantity;

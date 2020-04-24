@@ -104,6 +104,7 @@ public class SettingFragment extends Fragment {
         sw_night.setTextOff("OFF");
         sw_night.setTextOn("ON");
 
+        //mengambil informasi dari database terhadap tema dan juga notifikasi user
         userRefs = FirebaseDatabase.getInstance().getReference().child("User").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         userRefs.addValueEventListener(new ValueEventListener() {
             @Override
@@ -133,6 +134,7 @@ public class SettingFragment extends Fragment {
             }
         });
 
+        //proses pengubahan pada database sesuai dengan switch pada notifikasi
         sw_notif.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -144,6 +146,7 @@ public class SettingFragment extends Fragment {
             }
         });
 
+        //proses pengubahan pada database sesuai dengan switch pada night theme
         sw_night.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -164,6 +167,7 @@ public class SettingFragment extends Fragment {
 
     }
 
+    //method untuk menampilkan pesan dialog untuk konfirmasi pada saat log out
     public void alertsignout(){ // fungsi untuk membuat alert dialog ketika ingin logout
         AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(getActivity());
 

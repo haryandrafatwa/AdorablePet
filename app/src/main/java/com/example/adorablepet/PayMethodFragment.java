@@ -189,6 +189,7 @@ public class PayMethodFragment extends Fragment {
         String titik = rupiah.replaceAll("[,]",".");
         price = titik;
 
+        //mengirim string ke method pop up sesuai dengan bank yang dipilih untuk ditampilkan di pesan dialog/pop up
         mandiri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -219,6 +220,7 @@ public class PayMethodFragment extends Fragment {
 
     }
 
+    //method untuk menampilkan pop up/ pesan dialog setelah memilih bank
     private void initializeDialogPayNow(final String payMethod, String totalPayment, final HashMap hashMap){
         final Dialog dialog1 = new Dialog(getActivity(),R.style.CustomAlertDialog);
         dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -278,6 +280,7 @@ public class PayMethodFragment extends Fragment {
         for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
             fm.popBackStack();
         }
+        //dilakukan iterasi beserta pop stack fragment agar fragment tidak tumpah tindih
         ShelterFragment shelterFragment = new ShelterFragment();
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frameFragment,shelterFragment).addToBackStack(null);
